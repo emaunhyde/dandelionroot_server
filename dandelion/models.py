@@ -7,12 +7,13 @@ from users.models import User
 class Ingredient(models.Model):
     name = models.CharField(max_length=200)
     scientific_name = models.CharField(max_length=300)
-    description = models.TextField(null=False, blank=False)
+    photo_url = models.TextField()
+    taste = models.TextField()
     key_benefits = models.TextField()
     usage = models.TextField()
-    taste = models.TextField()
+    description = models.TextField(null=False, blank=False)
     caution = models.TextField()
-    photo_url = models.TextField()
+    # blogs = models.ForeignKey(Blog,)
 
     def __str__(self):
         return self.name
@@ -25,8 +26,8 @@ class Blog(models.Model):
         Ingredient, on_delete=models.CASCADE, related_name='ingredient')
     title = models.CharField(max_length=100)
     byline = models.CharField(max_length=300)
-    body = models.TextField()
     photo_url = models.TextField(null=True, blank=True)
+    body = models.TextField()
 
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
@@ -46,4 +47,4 @@ class Comment(models.Model):
     updated_at = models.DateField(auto_now=True)
 
     def __str__(self):
-        return self.author
+        return self.body

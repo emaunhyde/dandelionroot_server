@@ -3,11 +3,6 @@ from .models import Ingredient, Blog, Comment
 
 
 class IngredientSerializer(serializers.HyperlinkedModelSerializer):
-    blogs = serializers.HyperlinkedRelatedField(
-        view_name='blog_detail',
-        many=True,
-        read_only=True
-    )
 
     class Meta:
         model = Ingredient
