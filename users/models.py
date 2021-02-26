@@ -5,6 +5,8 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
     email = models.EmailField(verbose_name='email',
                               max_length=255, unique=True)
     photo_url = models.CharField(max_length=500, blank=False)
@@ -13,4 +15,4 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
 
     def get_username(self):
-        return self.email
+        return self.username
