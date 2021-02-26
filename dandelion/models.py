@@ -8,12 +8,11 @@ class Ingredient(models.Model):
     name = models.CharField(max_length=200)
     scientific_name = models.CharField(max_length=300)
     photo_url = models.TextField()
-    taste = models.TextField()
     key_benefits = models.TextField()
+    taste = models.TextField()
     usage = models.TextField()
     description = models.TextField(null=False, blank=False)
     caution = models.TextField()
-    # blogs = models.ForeignKey(Blog,)
 
     def __str__(self):
         return self.name
@@ -21,14 +20,13 @@ class Ingredient(models.Model):
 
 class Blog(models.Model):
     written_by = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='author')
+        User, on_delete=models.CASCADE, related_name='user_blogs')
     ingredient = models.ForeignKey(
-        Ingredient, on_delete=models.CASCADE, related_name='ingredient')
+        Ingredient, on_delete=models.CASCADE, related_name='blogs')
     title = models.CharField(max_length=100)
     byline = models.CharField(max_length=300)
     photo_url = models.TextField(null=True, blank=True)
     body = models.TextField()
-
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 
@@ -38,9 +36,9 @@ class Blog(models.Model):
 
 class Comment(models.Model):
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='user')
+        User, on_delete=models.CASCADE, related_name='user_comments')
     blog = models.ForeignKey(
-        Blog, on_delete=models.CASCADE, related_name='blog'
+        Blog, on_delete=models.CASCADE, related_name='comments'
     )
     body = models.TextField()
     created_at = models.DateField(auto_now_add=True)
