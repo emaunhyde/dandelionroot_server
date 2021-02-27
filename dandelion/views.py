@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from rest_framework import generics
 from .serializers import IngredientSerializer, BlogSerializer, CommentSerializer
 from .models import Ingredient, Blog, Comment
 from rest_framework import viewsets
+from .forms import BlogForm
 # Create your views here.
 
 
@@ -41,3 +42,15 @@ class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
 #     print(args, kwargs)
 #     print(request.user)
 #     return HttpResponse("<h1>wtf</h1>")
+
+# @login_required
+def blog_create(request):
+    if request.method == 'POST':
+        form = BlogForm(request.POST)
+        if form.is_valid():
+            blog = form.save()
+
+            return redirect('blog_list')
+    else:
+        form = BlogForm()
+    return render(request, 'dandelion/blog_form.html', {'form': form})
