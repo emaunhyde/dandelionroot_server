@@ -4,7 +4,7 @@ from users.models import User
 from users.serializers import UserCreateSerializer
 
 
-class CommentSerializer(serializers.HyperlinkedModelSerializer):
+class CommentSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(
         many=False,
         read_only=True,
@@ -16,7 +16,8 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'body', 'created_at',  'author')
 
 
-class BlogSerializer(serializers.HyperlinkedModelSerializer):
+class BlogSerializer(serializers.ModelSerializer):
+
     written_by = UserCreateSerializer(
         many=False,
         read_only=True
@@ -35,11 +36,11 @@ class BlogSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Blog
-        fields = ('id', 'ingredient', 'title',
-                  'byline', 'body', 'photo_url', 'created_at', 'comments', 'written_by')
+        fields = ('id', 'title', 'ingredient', 'written_by',
+                  'byline', 'body', 'photo_url', 'created_at', 'comments')
 
 
-class IngredientSerializer(serializers.HyperlinkedModelSerializer):
+class IngredientSerializer(serializers.ModelSerializer):
     blogs = BlogSerializer(
         many=True,
         read_only=True
