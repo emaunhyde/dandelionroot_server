@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'users',
     'dandelion',
     'rest_framework',
-    'rest_framework.authtoken',
+    # 'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -130,14 +130,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        # Basic Authentication should be removed in production
-        'rest_framework.authentication.BasicAuthentication',
-    ],
+        #     # Basic Authentication should be removed in production
+        #     'rest_framework.authentication.BasicAuthentication',
+        # ],
 
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        # 'DEFAULT_PERMISSION_CLASSES': [
+        #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
 
