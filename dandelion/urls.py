@@ -19,7 +19,14 @@ urlpatterns = [
     path("comments/<int:pk>", views.CommentDetail.as_view(), name="comment_detail"),
 
     url(r'^blogs/new$', views.blog_create, name='blog_create'),
+
 ]
+
+
+# router = DefaultRouter()
+# router.register(r'blogs', views.BlogViewSet, basename="blog")
+# urlpatterns = router.urls
+
 
 # dont need these if they're linked properly cause they should pull up ??
 # need a path for blog post based on the ingredient its connected to

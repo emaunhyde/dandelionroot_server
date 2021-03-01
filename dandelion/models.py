@@ -20,9 +20,9 @@ class Ingredient(models.Model):
 
 class Blog(models.Model):
     written_by = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='user_blogs')
+        User, on_delete=models.CASCADE, related_name='user_blogs', null=True, blank=True)
     ingredient = models.ForeignKey(
-        Ingredient, on_delete=models.CASCADE, related_name='blogs')
+        Ingredient, on_delete=models.CASCADE, related_name='blogs', null=True, blank=True)
     title = models.CharField(max_length=100)
     byline = models.CharField(max_length=300)
     photo_url = models.TextField(null=True, blank=True)
@@ -36,9 +36,9 @@ class Blog(models.Model):
 
 class Comment(models.Model):
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='user_comments')
+        User, on_delete=models.CASCADE, related_name='user_comments', null=True, blank=True)
     blog = models.ForeignKey(
-        Blog, on_delete=models.CASCADE, related_name='comments'
+        Blog, on_delete=models.CASCADE, related_name='comments', null=True, blank=True
     )
     body = models.TextField()
     created_at = models.DateField(auto_now_add=True)
