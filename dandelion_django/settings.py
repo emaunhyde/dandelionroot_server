@@ -49,9 +49,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -151,3 +151,5 @@ DJOSER = {
         'user': 'users.serializers.UserCreateSerializer'
     }
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
