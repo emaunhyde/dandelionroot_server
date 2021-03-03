@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from rest_framework import generics, viewsets
 from .serializers import IngredientSerializer, BlogSerializer, CommentSerializer
 from .models import Ingredient, Blog, Comment
-from django_filters import rest_framework as filters
+# from django_filters import rest_framework as filters
 from .forms import BlogForm, CommentForm
 # Create your views here.
 
