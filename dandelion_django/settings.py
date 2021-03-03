@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
     'corsheaders',
     'djoser',
     'users',
@@ -130,15 +131,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        # 'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        #     # Basic Authentication should be removed in production
-        #     'rest_framework.authentication.BasicAuthentication',
-        # ],
+    ],
 
-        # 'DEFAULT_PERMISSION_CLASSES': [
-        #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
 }
 
 AUTH_USER_MODEL = 'users.User'

@@ -1,16 +1,16 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from rest_framework import generics
+from rest_framework import generics, viewsets
 from .serializers import IngredientSerializer, BlogSerializer, CommentSerializer
 from .models import Ingredient, Blog, Comment
-from rest_framework import viewsets
-from .forms import BlogForm
+from django_filters import rest_framework as filters
+from .forms import BlogForm, CommentForm
 # Create your views here.
 
 
 class IngredientList(generics.ListCreateAPIView):
-    queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
+    queryset = Ingredient.objects.all()
 
 
 class IngredientDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -21,10 +21,6 @@ class IngredientDetail(generics.RetrieveUpdateDestroyAPIView):
 class BlogList(generics.ListCreateAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
-
-# class BlogViewSet(viewsets.ModelViewSet):
-#     queryset = Blog.objects.all()
-#     serializer_class = BlogSerializer
 
 
 class BlogDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -42,12 +38,13 @@ class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CommentSerializer
 
 
-# def test_view(request, *args, **kwargs):
-#     print(args, kwargs)
-#     print(request.user)
-#     return HttpResponse("<h1>wtf</h1>")
+# class IngredientSearch(generics.ListAPIView):
+#     query_set = Ingredient.objects.all()
+#     serializer = IngredientSerializer
+#     filter_backends = (filters.DjangoFilterBackend)
+#     filterset_fields = ('description', 'key_benefits')
 
-# @login_required
+
 def blog_create(request):
     if request.method == 'POST':
         form = BlogForm(request.POST)
@@ -58,3 +55,15 @@ def blog_create(request):
     else:
         form = BlogForm()
     return render(request, 'dandelion/blog_form.html', {'form': form})
+
+
+def comment_create(request):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save()
+
+            return redirect('blog_list')
+    else:
+        form = CommentForm()
+    return render(request, 'dandelion/comment_form.html', {'form': form})

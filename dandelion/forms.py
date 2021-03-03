@@ -8,3 +8,12 @@ class BlogForm(forms.ModelForm):
         model = Blog
         fields = ('title', 'byline', 'photo_url',
                   'body', 'ingredient', 'written_by')
+
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ('author',
+                  'body',
+                  'blog')
